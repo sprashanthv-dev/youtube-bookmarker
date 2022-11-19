@@ -63,8 +63,10 @@
          youTubeLeftControls = document.getElementsByClassName("ytp-left-controls")[0];
          youTubePlayer = document.getElementsByClassName("video-stream")[0];
 
-         //* Manipulate the DOM to add our bookmark btn to youtube controls
-         youTubeLeftControls.appendChild(bookmarkButton);
+         if (youTubeLeftControls) {
+            //* Manipulate the DOM to add our bookmark btn to youtube controls
+            youTubeLeftControls.appendChild(bookmarkButton);
+         }
     }
 
     const handleClickOnBookmark = bookmarkButton  => {
