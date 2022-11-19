@@ -4,9 +4,23 @@ const pattern = "youtube.com/watch";
 const failureMsg = "This is not a youtube video page";
 const noBookMarks = "No bookmarks to show";
 
-// adding a new bookmark row to the popup
-const addNewBookmark = () => {};
+//* adding a new bookmark row to the popup
+const addNewBookmark = (bookmarkElement, bookmark) => {
+  const bookmarkTitleElement = document.createElement("div");
+  const newBookmarkElement = document.createElement("div");
 
+  bookmarkTitleElement.textContent = bookmark.description;
+  bookmarkTitleElement.className = "bookmark-title";
+
+  newBookmarkElement.id = `bookmark-${bookmark.time}`;
+  newBookmarkElement.className = "bookmark";
+  newBookmarkElement.setAttribute("timestamp", bookmark.time);
+
+  newBookmarkElement.appendChild(bookmarkTitleElement);
+  bookmarkElement.appendChild(newBookmarkElement);
+};
+
+//* display all currently saved bookmarks for the video
 const viewBookmarks = (currentVideoBookmarks = []) => {
   const bookmarkElement = document.getElementById("bookmarks");
 
@@ -15,7 +29,7 @@ const viewBookmarks = (currentVideoBookmarks = []) => {
 
     if (currentVideoBookmarks.length > 0) {
 
-      for (bookmark of currentVideoBookmarks) {
+      for (let bookmark of currentVideoBookmarks) {
         addNewBookmark(bookmarkElement, bookmark);
       }
     } else {
@@ -33,6 +47,8 @@ const setBookmarkAttributes =  () => {};
 //* Event that fires when an html document is loaded
 //* This is where we load all our bookmarks and display them
 document.addEventListener("DOMContentLoaded", async () => {
+
+  console.log("Hello World !!");
 
   let activeTabInfo = await getCurrentTab();
   let currentVideoId = getCurrentVideoId(activeTabInfo);
